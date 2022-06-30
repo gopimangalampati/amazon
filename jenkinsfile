@@ -8,20 +8,20 @@ pipeline {
     stages {
        stage("Git Checkout"){
           steps{
-           git 'https://github.com/sriharshabalasa/ajio.git'
+           git 'https://github.com/gopimangalampati/amazon.git'
            }
           }
           
            stage("build"){
           steps{
-           sh "mvn -f ajiolux/pom.xml clean package"
+           sh "mvn -f amazon/pom.xml clean package"
            }
           }
         
         stage ('Deploy') {
       steps {
-        script {
-          deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://13.233.192.177:8080/')], contextPath: '', onFailure: false, war: 'ajiolux/target/*.war' 
+        script 
+          deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://3.7.73.24:8080/')], contextPath: '', onFailure: false, war: 'ajiolux/target/*.war' 
         }
       }
     }
